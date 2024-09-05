@@ -15,7 +15,9 @@ const messages = {
 	SAVE_EDITED_FLASHCARD: "SAVE_EDITED_FLASHCARD",
 	UPDATE_EDITABLE_QUESTION: "UPDATE_EDITABLE_QUESTION",
 	UPDATE_EDITABLE_ANSWER: "UPDATE_EDITABLE_ANSWER",
-	UPDATE_RATING: "UPDATE_RATING"
+	UPDATE_RATING: "UPDATE_RATING",
+	CANCEL_NEW_FLASHCARD: "CANCEL_NEW_FLASHCARD",
+	CANCEL_EDIT_FLASHCARD: "CANCEL_EDIT_FLASHCARD",
 };
 
 function flashcardView(dispatch, flashcard, editingFlashcard, editableFlashcard) {
@@ -110,6 +112,7 @@ function flashcardView(dispatch, flashcard, editingFlashcard, editableFlashcard)
 						]
 				  )
 				: null,
+        p(`Rating: ${flashcard.rating}`),
 			flashcard.id === editingFlashcard
 				? button(
 						{
@@ -151,30 +154,34 @@ function newFlashcardFormView(dispatch, model) {
 			]),
 			button(
 				{
-					className: "bg-blue-500 text-white px-4 py-2 rounded",
+					className: "bg-blue-500 text-white px-4 py-2 border-solid border-2 border-gray mr-5",
 					onclick: () => dispatch(messages.SAVE_FLASHCARD)
 				},
 				"Save"
+			),
+			button(
+				{
+					className: "bg-red-500 text-white px-4 py-2 border-solid border-2 border-gray",
+					onclick: () => dispatch(messages.CANCEL_NEW_FLASHCARD)
+				},
+				"Cancel"
 			)
 		]
 	);
 }
 
 function view(dispatch, model) {
-	// I use .slice() to make a copy of the array so i dont change the original array
 	const sortedFlashcards = model.flashcards.slice().sort((a, b) => {
-		// Sort based on rating with 0 being the lowest and 2 the highest
 		return (a.rating || 0) - (b.rating || 0);
 	});
 
 	return div({ className: "w-full container mx-auto p-4" }, [
-		button(
-			{
+		button({
 				id: "createButton",
-				className: "bg-blue-600 rounded-md text-white py-1 px-3 mt-4",
-				onclick: () => dispatch(messages.ADDCARD)
+				className: "bg-green-600 shadow-lg border-solid border-2 border-gray text-white py-1 px-3 mt-4",
+				onclick: () => dispatch(messages.ADD_FLASHCARD)
 			},
-			"Add card"
+			"Add flashcard"
 		),
 		div(
 			{
@@ -183,12 +190,7 @@ function view(dispatch, model) {
 			},
 			[
 				...sortedFlashcards.map((flashcard) =>
-					flashcardView(
-						dispatch,
-						flashcard,
-						model.editingFlashcard,
-						model.editableFlashcard
-					)
+					flashcardView(dispatch, flashcard, model.editingFlashcard,model.editableFlashcard)
 				),
 				model.showForm ? newFlashcardFormView(dispatch, model) : null
 			]
@@ -198,7 +200,7 @@ function view(dispatch, model) {
 
 function update(message, model, value) {
 	switch (message) {
-		case messages.ADDCARD:
+		case messages.ADD_FLASHCARD:
 			return {
 				...model,
 				showForm: true
@@ -315,11 +317,21 @@ function update(message, model, value) {
 							default:
 								cardRating = flashcard.rating || 0;
 						}
-						return { ...flashcard, rating: cardRating };
+						return { ...flashcard, rating: cardRating, showAnswer: false};
 					}
 					return flashcard;
 				})
 			};
+			case messages.CANCEL_NEW_FLASHCARD:
+				return {
+					...model,
+					showForm: false
+				};
+			case messages.CANCEL_EDIT_FLASHCARD:
+				return {
+					...model,
+					editingFlashcard: null
+				};
 
 		default:
 			return model;
