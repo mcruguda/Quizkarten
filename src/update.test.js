@@ -99,7 +99,7 @@ test("Save card inputs on form", () => {
 
 test("Deleting a flashcard", () => {
     const model = {
-        flashcards: [{id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false}],
+        flashcards: [{ id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false }],
         newFlashcard: { question: "", answer: "", rating: 0 },
         showForm: false,
         editingFlashcard: null,
@@ -108,9 +108,9 @@ test("Deleting a flashcard", () => {
     expect(update(messages.DELETE_FLASHCARD, model, 0)).toMatchObject({
         ...model, flashcards: []
     })
-    
+
     const model2 = {
-        flashcards: [{id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false}],
+        flashcards: [{ id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false }],
         newFlashcard: { question: "", answer: "", rating: 0 },
         showForm: false,
         editingFlashcard: 0,
@@ -123,31 +123,31 @@ test("Deleting a flashcard", () => {
 
 test("Toggeling answer", () => {
     const model = {
-        flashcards: [{id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false}],
+        flashcards: [{ id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false }],
         newFlashcard: { question: "", answer: "", rating: 0 },
         showForm: false,
         editingFlashcard: null,
         editableFlashcard: { question: "", answer: "" }
     }
     expect(update(messages.TOGGLE_ANSWER, model, 0)).toMatchObject({
-        ...model, flashcards: [{id: 0, question: "question", answer: "answer", rating: 0, showAnswer: true}]
+        ...model, flashcards: [{ id: 0, question: "question", answer: "answer", rating: 0, showAnswer: true }]
     })
-    
+
     const model2 = {
-        flashcards: [{id: 0, question: "question", answer: "answer", rating: 0, showAnswer: true}],
+        flashcards: [{ id: 0, question: "question", answer: "answer", rating: 0, showAnswer: true }],
         newFlashcard: { question: "", answer: "", rating: 0 },
         showForm: false,
         editingFlashcard: null,
         editableFlashcard: { question: "", answer: "" }
     }
     expect(update(messages.TOGGLE_ANSWER, model2, 0)).toMatchObject({
-        ...model2, flashcards: [{id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false}]
+        ...model2, flashcards: [{ id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false }]
     })
 })
 
 test("Edit flashcard", () => {
     const model = {
-        flashcards: [{id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false}],
+        flashcards: [{ id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false }],
         newFlashcard: { question: "", answer: "", rating: 0 },
         showForm: false,
         editingFlashcard: null,
@@ -155,65 +155,67 @@ test("Edit flashcard", () => {
     }
     expect(update(messages.EDIT_FLASHCARD, model, 0)).toMatchObject({
         ...model, editingFlashcard: 0, editableFlashcard: {
-            id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false}
+            id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false
+        }
     })
 })
 
 test("Save edit form", () => {
     const model = {
-        flashcards: [{id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false}],
+        flashcards: [{ id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false }],
         newFlashcard: { question: "", answer: "", rating: 0 },
         showForm: false,
         editingFlashcard: 0,
-        editableFlashcard: {id: 0, question: "question2", answer: "answer2", rating: 0, showAnswer: false}
+        editableFlashcard: { id: 0, question: "question2", answer: "answer2", rating: 0, showAnswer: false }
     }
     expect(update(messages.SAVE_EDITED_FLASHCARD, model)).toMatchObject({
-        ...model, flashcards: [{id: 0, question: "question2", answer: "answer2", rating: 0, showAnswer: false}],
-         editingFlashcard: null, editableFlashcard: {
-            question: "", answer: ""}
+        ...model, flashcards: [{ id: 0, question: "question2", answer: "answer2", rating: 0, showAnswer: false }],
+        editingFlashcard: null, editableFlashcard: {
+            question: "", answer: ""
+        }
     })
 })
 
 test("Save inputs from update form", () => {
     const model = {
-        flashcards: [{id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false}],
+        flashcards: [{ id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false }],
         newFlashcard: { question: "", answer: "", rating: 0 },
         showForm: false,
         editingFlashcard: 0,
-        editableFlashcard: {id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false}
+        editableFlashcard: { id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false }
     }
     expect(update(messages.UPDATE_EDITABLE_QUESTION, model, "question2")).toMatchObject({
-        ...model, editableFlashcard: {...model.editableFlashcard, question: "question2"}
+        ...model, editableFlashcard: { ...model.editableFlashcard, question: "question2" }
     })
     expect(update(messages.UPDATE_EDITABLE_ANSWER, model, "answer2")).toMatchObject({
-        ...model, editableFlashcard: {...model.editableFlashcard, answer: "answer2"}
+        ...model, editableFlashcard: { ...model.editableFlashcard, answer: "answer2" }
     })
 })
 
 test("Update Ratings", () => {
     const model = {
-        flashcards: [{id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false}],
+        flashcards: [{ id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false }],
         newFlashcard: { question: "", answer: "", rating: 0 },
         showForm: false,
         editingFlashcard: null,
-        editableFlashcard: {question: "", answer: ""}
+        editableFlashcard: { question: "", answer: "" }
     }
-    expect(update(messages.UPDATE_RATING, model, {id: 0,ratingType: 2})).toMatchObject({
-        ...model, flashcards: [{id: 0, question: "question", answer: "answer", rating: 2, showAnswer: false}]
+    expect(update(messages.UPDATE_RATING, model, { id: 0, ratingType: 2 })).toMatchObject({
+        ...model, flashcards: [{ id: 0, question: "question", answer: "answer", rating: 2, showAnswer: false }]
     })
-    
+
     const model2 = {
-        flashcards: [{id: 0, question: "question", answer: "answer", rating: 2, showAnswer: false}],
+        flashcards: [{ id: 0, question: "question", answer: "answer", rating: 2, showAnswer: false }],
         newFlashcard: { question: "", answer: "", rating: 0 },
         showForm: false,
         editingFlashcard: null,
-        editableFlashcard: {question: "", answer: ""}
+        editableFlashcard: { question: "", answer: "" }
     }
-    expect(update(messages.UPDATE_RATING, model2, {id: 0,ratingType: 1})).toMatchObject({
-        ...model2, flashcards: [{id: 0, question: "question", answer: "answer", rating: 3, showAnswer: false}]
+    expect(update(messages.UPDATE_RATING, model2, { id: 0, ratingType: 1 })).toMatchObject({
+        ...model2, flashcards: [{ id: 0, question: "question", answer: "answer", rating: 3, showAnswer: false }]
     })
-    expect(update(messages.UPDATE_RATING, model2, {id: 0,ratingType: 0})).toMatchObject({
-        ...model2, flashcards: [{id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false}]
+    expect(update(messages.UPDATE_RATING, model2, { id: 0, ratingType: 0 })).toMatchObject({
+        ...model2, flashcards: [{ id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false }]
     })
 })
 

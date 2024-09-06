@@ -16,7 +16,7 @@ test("Structure with card/cards", () => {
     //Answer not collapsed
     const newModel = {
         ...initialModel,
-        flashcards: [{id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false}]
+        flashcards: [{ id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false }]
     };
     const myView = view(() => { }, newModel);
     expect(myView.tagName).toBe("DIV");
@@ -33,11 +33,11 @@ test("Structure with card/cards", () => {
     expect(myView.children[1].children[0].children[3].tagName).toBe("P");
     expect(myView.children[1].children[0].children[1].children.length).toBe(1);
     expect(myView.children[1].children[0].children[1].children[0].text).toBe("question");
-    
+
     //Answer collapsed
     const newModel2 = {
         ...initialModel,
-        flashcards: [{id: 0, question: "question", answer: "answer", rating: 0, showAnswer: true}]
+        flashcards: [{ id: 0, question: "question", answer: "answer", rating: 0, showAnswer: true }]
     };
     const myView2 = view(() => { }, newModel2);
     expect(myView2.children[1].children[0].children.length).toBe(7);
@@ -74,14 +74,14 @@ test("Structure with card creation/edit form", () => {
     expect(myView.children[1].children[0].children[0].children[0].children[0].text).toBe("New Flashcard");
     expect(myView.children[1].children[0].children[0].children[1].properties.value).toBe("Question");
     expect(myView.children[1].children[0].children[0].children[2].properties.value).toBe("Answer");
-    
+
     //edit card
     newModel2 = {
         ...initialModel,
         showForm: true,
-        flashcards: [{id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false}],
+        flashcards: [{ id: 0, question: "question", answer: "answer", rating: 0, showAnswer: false }],
         editingFlashcard: 0,
-        editableFlashcard: { question: "question2", answer: "answer", rating:0, showAnswer: false}
+        editableFlashcard: { question: "question2", answer: "answer", rating: 0, showAnswer: false }
     };
     const myView2 = view(() => { }, newModel2);
     expect(myView2.children[1].children[0].children.length).toBe(5);

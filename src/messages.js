@@ -14,4 +14,4 @@ const messages = {
 	CANCEL_EDIT_FLASHCARD: "CANCEL_EDIT_FLASHCARD",
 };
 
-module.exports = {messages};
+module.exports = { messages };

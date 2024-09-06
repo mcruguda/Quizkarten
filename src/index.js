@@ -5,11 +5,11 @@ const hh = require("hyperscript-helpers");
 const { h, diff, patch } = require("virtual-dom");
 const { div, button, section, p, textarea } = hh(h);
 const createElement = require("virtual-dom/create-element");
-const {app} = require("./app");
-const {initialModel} = require("./model");
-const {view} = require("./view");
-const {update} = require("./update");
-const {createFlashcardForm, viewFlashcards} = require("./flashcards");
+const { app } = require("./app");
+const { initialModel } = require("./model");
+const { view } = require("./view");
+const { update } = require("./update");
+const { createFlashcardForm, viewFlashcards } = require("./flashcards");
 
 const rootNode = document.getElementById("app");
 app(initialModel, update, view, rootNode);

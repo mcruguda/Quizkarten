@@ -128,7 +128,7 @@ function update(message, model, value) {
 		case messages.CANCEL_NEW_FLASHCARD:
 			return {
 				...model,
-				newFlashcard: {question: "", answer: "", rating: 0},
+				newFlashcard: { question: "", answer: "", rating: 0 },
 				showForm: false
 			};
 
