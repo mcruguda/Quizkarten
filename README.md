@@ -7,3 +7,7 @@
 5. Execute the command "npm install" or "yarn install" (or equivilants from other package managers if you're not using npm/yarn)
 6. Execute the command "npm run dev" or "yarn dev" (or equivilants from other package managers if you're not using npm/yarn)
 7. You can now open the page under localhost:3000 or the IP-adress returned to you in the terminal after running the dev script.
+
+# Information
+
+This Project is based on the already existing base from https://github.com/SwitzerChees/modul323-counter
