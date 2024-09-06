@@ -18,4 +18,4 @@ function app(initialModel, update, view, node) {
 	}
 }
 
-module.exports = {app};
+module.exports = { app };

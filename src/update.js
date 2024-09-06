@@ -1,4 +1,4 @@
-const {messages} = require("./messages");
+const { messages } = require("./messages");
 
 function update(message, model, value) {
 	switch (message) {
@@ -119,25 +119,21 @@ function update(message, model, value) {
 							default:
 								cardRating = flashcard.rating || 0;
 						}
-						return { ...flashcard, rating: cardRating, showAnswer: false};
+						return { ...flashcard, rating: cardRating, showAnswer: false };
 					}
 					return flashcard;
 				})
 			};
-			case messages.CANCEL_NEW_FLASHCARD:
-				return {
-					...model,
-					showForm: false
-				};
-			case messages.CANCEL_EDIT_FLASHCARD:
-				return {
-					...model,
-					editingFlashcard: null
-				};
+		case messages.CANCEL_NEW_FLASHCARD:
+			return {
+				...model,
+				newFlashcard: {question: "", answer: "", rating: 0},
+				showForm: false
+			};
 
 		default:
 			return model;
 	}
 }
 
-module.exports = {update};
+module.exports = { update };

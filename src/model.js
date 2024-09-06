@@ -6,4 +6,4 @@ const initialModel = {
 	editableFlashcard: { question: "", answer: "" }
 };
 
-module.exports = {initialModel};
+module.exports = { initialModel };
