@@ -21,6 +21,7 @@ function update(message, model, value) {
 			};
 
 		case messages.SAVE_FLASHCARD:
+			//https://stackoverflow.com/questions/10232366/how-to-check-if-a-variable-is-null-or-empty-string-or-all-whitespace-in-javascri
 			if (
 				model.newFlashcard.question.trim() === "" ||
 				model.newFlashcard.answer.trim() === ""
